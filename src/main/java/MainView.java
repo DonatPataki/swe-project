@@ -6,8 +6,8 @@ import javafx.scene.transform.Affine;
 
 public class MainView extends VBox {
 
-    public static final int HEIGHT = 320;
-    public static final int WIDTH = 320;
+    public static final int HEIGHT = 640;
+    public static final int WIDTH = 640;
 
     private Canvas canvas;
 
@@ -19,7 +19,7 @@ public class MainView extends VBox {
         this.getChildren().addAll(this.canvas);
 
         this.affine = new Affine();
-        this.affine.appendScale(HEIGHT / 10f, WIDTH / 10f);
+        this.affine.appendScale(HEIGHT / 20f, WIDTH / 20f);
     }
 
     public void draw() {
@@ -32,23 +32,24 @@ public class MainView extends VBox {
         graphicsContext.setStroke(Color.GRAY);
         graphicsContext.setLineWidth(0.05f);
 
-        int[] layout = new Level().getLayout();
+        Level level = new LevelGenerator().generateLevel(20, 20);
+        int[][] layout = level.getLayout();
 
         graphicsContext.setFill(Color.BLACK);
-        for (int y = 0; y < 10; y++) {
-            for (int x = 0; x < 10; x++) {
-                if (layout[y * 10 + x] == 1) {
+        for (int y = 0; y < 20; y++) {
+            for (int x = 0; x < 20; x++) {
+                if (layout[y][x] == 0) {
                     graphicsContext.fillRect(x, y, 1, 1);
                 }
             }
         }
 
-        for (int x = 0; x < 11; x++) {
-            graphicsContext.strokeLine(x, 0, x, 10);
+        for (int x = 0; x < 21; x++) {
+            graphicsContext.strokeLine(x, 0, x, 20);
         }
 
-        for (int y = 0; y < 11; y++) {
-            graphicsContext.strokeLine(0, y, 10, y);
+        for (int y = 0; y < 21; y++) {
+            graphicsContext.strokeLine(0, y, 20, y);
         }
     }
 }
