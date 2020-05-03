@@ -1,8 +1,10 @@
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
+import org.tinylog.Logger;
 
 public class MainView extends VBox {
 
@@ -13,13 +15,30 @@ public class MainView extends VBox {
 
     private Affine affine;
 
+    private Player player;
+
+    private Level level;
+
     public MainView() {
-        this.canvas = new Canvas( HEIGHT,WIDTH);
+        this.canvas = new Canvas(HEIGHT,WIDTH);
+        this.canvas.setOnMousePressed(this::onMousePressed);
 
         this.getChildren().addAll(this.canvas);
 
         this.affine = new Affine();
         this.affine.appendScale(HEIGHT / 20f, WIDTH / 20f);
+        player = Player.getInstance();
+        this.level = new LevelGenerator().generateLevel(20, 20);
+    }
+
+    private void onMousePressed(MouseEvent event) {
+        double mouseX = event.getX();
+        double mouseY = event.getY();
+
+        Point position = new Point((int)mouseX / 32, (int)mouseY / 32);
+        Logger.debug("Clicked at cell index: " + position.getX() + " " + position.getY());
+        Player.getInstance().setPosition(position);
+        draw();
     }
 
     public void draw() {
@@ -32,7 +51,6 @@ public class MainView extends VBox {
         graphicsContext.setStroke(Color.GRAY);
         graphicsContext.setLineWidth(0.05f);
 
-        Level level = new LevelGenerator().generateLevel(20, 20);
         int[][] layout = level.getLayout();
 
         graphicsContext.setFill(Color.BLACK);
@@ -43,6 +61,9 @@ public class MainView extends VBox {
                 }
             }
         }
+
+        graphicsContext.setFill(Color.YELLOW);
+        graphicsContext.fillRect(player.getPosition().getX(), player.getPosition().getY(), 1, 1);
 
         for (int x = 0; x < 21; x++) {
             graphicsContext.strokeLine(x, 0, x, 20);
