@@ -1,15 +1,18 @@
+package model.pathfinding;
+
+import model.util.Point;
 import org.tinylog.Logger;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Pathfinder {
+public class Pathfinder {
     private List<Node> open;
     private List<Node> closed;
     private final int[][] level;
 
-    Pathfinder(int[][] level) {
+    public Pathfinder(int[][] level) {
         this.open = new ArrayList<>();
         this.closed = new ArrayList<>();
         this.level = level;
@@ -28,7 +31,7 @@ class Pathfinder {
         neigbors(current, endPoint);
 
         while (!open.isEmpty()) {
-            if (current.position.getX() == endPoint.getX() && current.position.getY() == endPoint.getY())
+            if (current.position.equals(endPoint))
                 break;
 
             current = open.get(0);
@@ -65,7 +68,7 @@ class Pathfinder {
     }
 
     private List<Node> calculatePath(Node node, Point endPoint) {
-        if (node.position.getX() != endPoint.getX() && node.position.getY() != endPoint.getY()) {
+        if (!node.position.equals(endPoint)) {
             Logger.debug("no path found");
             return new ArrayList<>();
         }

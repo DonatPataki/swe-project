@@ -1,4 +1,8 @@
- class Node implements Comparable {
+package model.pathfinding;
+
+import model.util.Point;
+
+public class Node implements Comparable {
     public Node parent;
     public Point position;
     public double g;
@@ -19,7 +23,10 @@
 
     @Override
     public boolean equals(Object o) {
+        if (! (o instanceof Node))
+            return  false;
+
         Node otherNode = (Node) o;
-        return this.position.getX() == otherNode.position.getX() && this.position.getY() == otherNode.position.getY();
+        return this.position.equals(otherNode.position);
     }
 }

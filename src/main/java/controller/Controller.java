@@ -1,4 +1,8 @@
+package controller;
+
 import javafx.scene.input.MouseEvent;
+import model.player.Player;
+import model.util.Point;
 import org.tinylog.Logger;
 
 public class Controller {

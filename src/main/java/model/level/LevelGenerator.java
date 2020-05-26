@@ -1,3 +1,8 @@
+package model.level;
+
+import model.util.Point;
+import model.util.Rectangle;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,7 +17,7 @@ public class LevelGenerator {
 
     public Level generateLevel(int levelWidth, int levelHeight) {
 
-        level = new Level();
+        level = new Level(levelWidth, levelHeight);
         int numRooms = 0;
         List<Rectangle> rooms = new ArrayList<>();
 
@@ -59,20 +64,20 @@ public class LevelGenerator {
     private void createRoom(Rectangle room) {
         for (int y = room.getLowerLeftCoord().getY() + 1; y < room.getUpperRightCoord().getY(); y++) {
             for (int x = room.getLowerLeftCoord().getX() + 1; x < room.getUpperRightCoord().getX(); x++) {
-                level.setLayout(x, y, 1);
+                level.setValueAtLocation(x, y, 1);
             }
         }
     }
 
     private void createHorTunnel(Point previous, Point current) {
         for (int x = Math.min(previous.getX(), current.getX()); x < Math.max(previous.getX(), current.getX()) + 1; x++) {
-            level.setLayout(x, previous.getY(), 1);
+            level.setValueAtLocation(x, previous.getY(), 1);
         }
     }
 
     private void createVerTunnel(Point previous, Point current) {
         for (int y = Math.min(previous.getY(), current.getY()); y < Math.max(previous.getY(), current.getY()) + 1; y++) {
-            level.setLayout(previous.getX(), y, 1);
+            level.setValueAtLocation(previous.getX(), y, 1);
         }
     }
 }

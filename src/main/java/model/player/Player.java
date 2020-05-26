@@ -1,5 +1,8 @@
+package model.player;
+
 import lombok.Getter;
 import lombok.Setter;
+import model.util.Point;
 
 public class Player {
 
