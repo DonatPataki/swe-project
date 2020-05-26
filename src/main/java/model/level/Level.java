@@ -21,8 +21,8 @@ public class Level {
     public Level(int colls, int rows) {
         this.layout = new int[rows][colls];
 
-        for (int y = 0; y < 10; y++) {
-            for (int x = 0; x < 10; x++) {
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < colls; x++) {
                 layout[y][x] = 0;
             }
         }
