@@ -27,7 +27,7 @@ public class Rectangle {
     /**
      * Returns the {@link Point} of the center of the rectangle.
      *
-     * @return the center {@Point}
+     * @return the center {@link Point}
      */
     public Point center() {
         return new Point((lowerLeftCoord.getX() + upperRightCoord.getX()) / 2, (lowerLeftCoord.getY() + upperRightCoord.getY()) / 2);
