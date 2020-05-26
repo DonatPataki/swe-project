@@ -6,7 +6,6 @@ import org.tinylog.Logger;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Implementation of A* search algorithm to find the optimal path between 2 point.
@@ -22,8 +21,8 @@ public class Pathfinder {
      * @param level a {@link Level} where we want to find a path
      */
     public Pathfinder(Level level) {
-        this.open = new ArrayList<>();
-        this.closed = new ArrayList<>();
+        open = new ArrayList<>();
+        closed = new ArrayList<>();
         this.level = level.getLayout();
     }
 
@@ -36,8 +35,8 @@ public class Pathfinder {
      * If no path can be taken returns an empty list.
      */
     public List<Node> findPath(Point startingPoint, Point endPoint) {
-        this.open.clear();
-        this.closed.clear();
+        open.clear();
+        closed.clear();
 
         return calculatePath(searchPossiblePaths(startingPoint, endPoint), endPoint);
     }
@@ -79,18 +78,18 @@ public class Pathfinder {
                 Point neigborPosition = new Point(centerNode.position.getX() + x, centerNode.position.getY() + y);
                 node = new Node(centerNode, neigborPosition);
                 if ((x != 0 || y != 0)
-                        && node.position.getX() > -1 && node.position.getX() < this.level[0].length
-                        && node.position.getY() > -1 && node.position.getY() < this.level.length
-                        && this.level[node.position.getY()][node.position.getX()] != 1
-                        && !this.open.contains(node) && !this.closed.contains(node)) {
+                        && node.position.getX() > -1 && node.position.getX() < level[0].length
+                        && node.position.getY() > -1 && node.position.getY() < level.length
+                        && level[node.position.getY()][node.position.getX()] != 1
+                        && !open.contains(node) && !closed.contains(node)) {
                     node.g = node.parent.g + distance(node.position, node.parent.position);
                     node.h = distance(node.position, endPoint);
 
-                    this.open.add(node);
+                    open.add(node);
                 }
             }
         }
-        Collections.sort(this.open);
+        open.sort(Node::compareTo);
     }
 
     /**
