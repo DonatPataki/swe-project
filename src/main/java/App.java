@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.gamestate.GameState;
 import view.MainView;
 
 public class App extends Application {
@@ -12,7 +13,8 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-        mainView.draw();
+        GameState gameState = GameState.getInstance();
+        mainView.draw(gameState.getLevel().getLayout(), gameState.getPlayer());
     }
 
     public static void main(String[] args) {

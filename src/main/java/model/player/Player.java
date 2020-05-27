@@ -19,7 +19,7 @@ public class Player {
      * Constructs {@code Player}.
      */
     private Player() {
-        this.position = new Point((int)(Math.random() * 19), (int)(Math.random() * 19));
+        this.position = new Point(0 , 0);
     }
 
     /**

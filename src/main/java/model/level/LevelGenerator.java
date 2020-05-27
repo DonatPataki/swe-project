@@ -1,5 +1,6 @@
 package model.level;
 
+import model.player.Player;
 import model.util.Point;
 import model.util.Rectangle;
 
@@ -67,6 +68,8 @@ public class LevelGenerator {
                 numRooms++;
             }
         }
+
+        Player.getInstance().setPosition(rooms.get(0).center());
 
         return level;
     }

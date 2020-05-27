@@ -34,7 +34,7 @@ public class Pathfinder {
      * @return If the end point is accessible returns a list of {@link Node} which represents the optimal path.
      * If no path can be taken returns an empty list.
      */
-    public List<Node> findPath(Point startingPoint, Point endPoint) {
+    public List<Point> findPath(Point startingPoint, Point endPoint) {
         open.clear();
         closed.clear();
 
@@ -80,7 +80,7 @@ public class Pathfinder {
                 if ((x != 0 || y != 0)
                         && node.position.getX() > -1 && node.position.getX() < level[0].length
                         && node.position.getY() > -1 && node.position.getY() < level.length
-                        && level[node.position.getY()][node.position.getX()] != 1
+                        && level[node.position.getY()][node.position.getX()] > 0
                         && !open.contains(node) && !closed.contains(node)) {
                     node.g = node.parent.g + distance(node.position, node.parent.position);
                     node.h = distance(node.position, endPoint);
@@ -108,19 +108,19 @@ public class Pathfinder {
      *
      * @param node a {@link Node} from which we can get back to the sarting location
      * @param endPoint end {@link Point} of the search
-     * @return If optimal path exits between 2 points returns the List of {@link Node}s to get there. Otherwise returns an empty list
+     * @return If optimal path exits between 2 points returns the List of {@link Point}s to get there. Otherwise returns an empty list
      */
-    private List<Node> calculatePath(Node node, Point endPoint) {
+    private List<Point> calculatePath(Node node, Point endPoint) {
         if (!node.position.equals(endPoint)) {
             Logger.debug("no path found");
             return new ArrayList<>();
         }
 
-        List<Node> path = new ArrayList<>();
-        path.add(0, node);
+        List<Point> path = new ArrayList<>();
+        path.add(0, node.position);
         while (node.parent != null) {
             node = node.parent;
-            path.add(0, node);
+            path.add(0, node.position);
         }
         Logger.debug("path found");
         return path;
