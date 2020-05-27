@@ -18,7 +18,7 @@ public class Player {
     private Point position;
 
     /**
-     * Constructs {@code Player}.
+     * Default constructor.
      */
     private Player() {
     }

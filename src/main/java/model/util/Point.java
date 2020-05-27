@@ -26,7 +26,11 @@ public class Point {
         this.y = y;
     }
 
+    /**
+     * Default constructor for {@code Point}.
+     */
     public Point() {}
+
     /**
      * Compares 2 {@code Point} object.
      *
