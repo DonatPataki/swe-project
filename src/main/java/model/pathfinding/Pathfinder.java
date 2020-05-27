@@ -122,6 +122,7 @@ public class Pathfinder {
             node = node.parent;
             path.add(0, node.position);
         }
+        path.remove(0);
         Logger.debug("path found");
         return path;
     }

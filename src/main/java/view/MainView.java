@@ -23,11 +23,11 @@ public class MainView extends VBox {
 
     GameController gameController;
 
-    public MainView() throws NoSuchFieldError {
-        gameController = new GameController(this);
+    public MainView() {
+        this.gameController = new GameController(this);
         this.canvas = new Canvas(HEIGHT,WIDTH);
-        this.canvas.setOnMousePressed(gameController::onMousePressed);
-        this.canvas.setOnKeyPressed(gameController::onKeyPressed);
+        this.canvas.setOnMousePressed(this.gameController::onMousePressed);
+        this.canvas.setOnKeyPressed(this.gameController::onKeyPressed);
         this.canvas.setFocusTraversable(true);
 
         this.getChildren().addAll(this.canvas);

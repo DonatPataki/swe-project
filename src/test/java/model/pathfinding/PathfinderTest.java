@@ -22,8 +22,8 @@ class PathfinderTest {
         testLevel.setValueAtLocation(2, 3, 1);
         Pathfinder testPathfinder = new Pathfinder(testLevel);
 
-        assertEquals( 7, testPathfinder.findPath(new Point(0, 0), new Point(2, 0)).size());
-        assertEquals( new Node(null, new Point(0, 0)).position, testPathfinder.findPath(new Point(0, 0), new Point(2, 0)).get(0));
+        assertEquals( 6, testPathfinder.findPath(new Point(0, 0), new Point(2, 0)).size());
+        assertEquals( new Node(null, new Point(0, 1)).position, testPathfinder.findPath(new Point(0, 0), new Point(2, 0)).get(0));
 
         testLevel.setValueAtLocation(0, 2, 0);
         assertEquals( 0, testPathfinder.findPath(new Point(0, 0), new Point(2, 0)).size());

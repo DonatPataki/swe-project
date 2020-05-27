@@ -21,7 +21,7 @@ public class GameState {
         this.level = new LevelGenerator().generateLevel(MainView.COLLUMS, MainView.ROWS);
     }
 
-    public static GameState getInstance() {
+    synchronized public static GameState getInstance() {
         if (instance == null)
             instance = new GameState();
         return instance;

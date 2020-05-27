@@ -4,6 +4,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import lombok.Getter;
 import model.gamestate.GameState;
 import model.level.LevelGenerator;
 import model.pathfinding.Pathfinder;
@@ -17,6 +18,7 @@ import static view.MainView.*;
 
 public class GameController {
 
+    @Getter
     private MainView mainView;
 
     private GameState gameState;
@@ -36,7 +38,7 @@ public class GameController {
 
         List<Point> path = pathfinder.findPath(gameState.getPlayer().getPosition(), position);
         if (path.size() != 0)
-            moveCharacter(path);
+                moveCharacter(path);
     }
 
     public void onKeyPressed(KeyEvent keyEvent) {
@@ -52,6 +54,10 @@ public class GameController {
     }
 
     public void moveCharacter(List<Point> path) {
-
+        gameState.getPlayer().setPosition(path.get(0));
+        path.remove(0);
+        display();
+        if (!path.isEmpty())
+            moveCharacter(path);
     }
 }

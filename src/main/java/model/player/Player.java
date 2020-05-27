@@ -19,7 +19,6 @@ public class Player {
      * Constructs {@code Player}.
      */
     private Player() {
-        this.position = new Point(0 , 0);
     }
 
     /**
@@ -27,7 +26,7 @@ public class Player {
      *
      * @return the instance of the {@code Player}
      */
-    public static Player getInstance() {
+    synchronized public static Player getInstance() {
         if (instance == null) {
             instance = new Player();
         }
