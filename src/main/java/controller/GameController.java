@@ -29,14 +29,11 @@ public class GameController {
     }
 
     public void onMousePressed(MouseEvent event) {
-        double mouseX = event.getX();
-        double mouseY = event.getY();
-
-        Point position = new Point((int)mouseX / HORIZONTAL, (int)mouseY / VERTICAL);
-        Logger.debug("clicked at location: " + position.getX() + " " + position.getY());
+        Point location = new Point((int)event.getX() / HORIZONTAL, (int)event.getY() / VERTICAL);
+        Logger.debug("clicked at location: " + location.getX() + " " + location.getY());
         Pathfinder pathfinder = new Pathfinder(gameState.getLevel());
 
-        List<Point> path = pathfinder.findPath(gameState.getPlayer().getPosition(), position);
+        List<Point> path = pathfinder.findPath(gameState.getPlayer().getPosition(), location);
         if (path.size() != 0)
                 moveCharacter(path);
     }
@@ -45,6 +42,17 @@ public class GameController {
         if (keyEvent.getCode() == KeyCode.R) {
             Logger.debug("regenerate level");
             gameState.setLevel(new LevelGenerator().generateLevel(COLLUMS, ROWS));
+            display();
+        }
+
+        if (keyEvent.getCode() == KeyCode.F5) {
+            Logger.debug("saving");
+            gameState.save();
+        }
+
+        if (keyEvent.getCode() == KeyCode.F6) {
+            Logger.debug("loading");
+            gameState.load();
             display();
         }
     }

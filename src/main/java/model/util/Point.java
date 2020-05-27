@@ -1,13 +1,15 @@
 package model.util;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
+import javax.xml.bind.annotation.*;
 
 /**
  * Represents a 2 dimensional point in a grid.
  */
-@Getter
-@Setter
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"x", "y"})
+@Data
 public class Point {
 
     private int x;
@@ -24,6 +26,7 @@ public class Point {
         this.y = y;
     }
 
+    public Point() {}
     /**
      * Compares 2 {@code Point} object.
      *

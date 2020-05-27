@@ -1,18 +1,20 @@
 package model.player;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import model.util.Point;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * Singelton class which represents the player in the game.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@Data
 public class Player {
 
     private static Player instance = null;
 
-    @Getter
-    @Setter
     private Point position;
 
     /**

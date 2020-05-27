@@ -1,13 +1,14 @@
 package model.level;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
+import javax.xml.bind.annotation.*;
 
 /**
  * Represents a level in the game.
  */
-@Getter
-@Setter
+@XmlAccessorType(XmlAccessType.FIELD)
+@Data
 public class Level {
 
     private int[][] layout;
@@ -27,6 +28,8 @@ public class Level {
             }
         }
     }
+
+    public Level() {}
 
     /**
      * Sets the value at a specific location.
