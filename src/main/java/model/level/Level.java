@@ -1,17 +1,20 @@
 package model.level;
 
 import lombok.Data;
+import model.util.Point;
 
 import javax.xml.bind.annotation.*;
 
 /**
  * Represents a level in the game.
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 @Data
 public class Level {
 
     private int[][] layout;
+    private Point ascendPoint;
+    private Point descentPoint;
 
     /**
      * Constructs a {@code Level} with the given number of rows and collums.
@@ -29,6 +32,9 @@ public class Level {
         }
     }
 
+    /**
+     * Default constructor
+     */
     public Level() {}
 
     /**

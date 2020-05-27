@@ -14,7 +14,7 @@ public class App extends Application {
         stage.show();
 
         GameState gameState = GameState.getInstance();
-        mainView.draw(gameState.getLevel().getLayout(), gameState.getPlayer());
+        mainView.draw(gameState.getLevels().get(gameState.getCurrentFloorNum()), gameState.getPlayer());
     }
 
     public static void main(String[] args) {

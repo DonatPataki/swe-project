@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
+import model.level.Level;
 import model.player.Player;
 
 public class MainView extends VBox {
@@ -36,7 +37,7 @@ public class MainView extends VBox {
         this.affine.appendScale(HEIGHT / (float)ROWS, WIDTH / (float)COLLUMS);
     }
 
-    public void draw(int[][] layout, Player player) {
+    public void draw(Level currentLevel, Player player) {
         GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
         graphicsContext.setTransform(this.affine);
 
@@ -46,6 +47,7 @@ public class MainView extends VBox {
         graphicsContext.setStroke(Color.GRAY);
         graphicsContext.setLineWidth(0.05f);
 
+        int[][] layout = currentLevel.getLayout();
         graphicsContext.setFill(Color.BLACK);
         for (int y = 0; y < ROWS; y++) {
             for (int x = 0; x < COLLUMS; x++) {
@@ -54,6 +56,12 @@ public class MainView extends VBox {
                 }
             }
         }
+
+        graphicsContext.setFill(Color.BLUE);
+        graphicsContext.fillRect(currentLevel.getAscendPoint().getX(), currentLevel.getAscendPoint().getY(), 1, 1);
+
+        graphicsContext.setFill(Color.RED);
+        graphicsContext.fillRect(currentLevel.getDescentPoint().getX(), currentLevel.getDescentPoint().getY(), 1, 1);
 
         graphicsContext.setFill(Color.YELLOW);
         graphicsContext.fillRect(player.getPosition().getX(), player.getPosition().getY(), 1, 1);

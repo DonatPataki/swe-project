@@ -26,13 +26,13 @@ public class LevelGenerator {
     public Level generateLevel(int levelWidth, int levelHeight) {
         final int ROOM_MAX_SIZE = 8;
         final int ROOM_MIN_SIZE = 4;
-        final int MAX_ROOMS = 10;
+        final int ITERATION_COUNT = 20;
 
         level = new Level(levelWidth, levelHeight);
         int numRooms = 0;
         List<Rectangle> rooms = new ArrayList<>();
 
-        for (int i = 0; i < MAX_ROOMS + 1; i++) {
+        for (int i = 0; i < ITERATION_COUNT + 1; i++) {
             int w = random.nextInt((ROOM_MAX_SIZE - ROOM_MIN_SIZE) + 1) + ROOM_MIN_SIZE;
             int h = random.nextInt((ROOM_MAX_SIZE - ROOM_MIN_SIZE) + 1) + ROOM_MIN_SIZE;
             int x = random.nextInt(levelWidth - w);
@@ -69,6 +69,8 @@ public class LevelGenerator {
             }
         }
 
+        level.setAscendPoint(rooms.get(0).center());
+        level.setDescentPoint(rooms.get(rooms.size() - 1).center());
         Player.getInstance().setPosition(rooms.get(0).center());
 
         return level;
@@ -101,6 +103,7 @@ public class LevelGenerator {
 
     /**
      * Creates a vertical tunnel from a {@link Rectangle}'s center to another's center.
+     *
      * @param from starting room of the tunnel
      * @param toward where we want to bore
      */
