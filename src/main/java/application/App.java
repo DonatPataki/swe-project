@@ -1,3 +1,5 @@
+package application;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -15,9 +17,5 @@ public class App extends Application {
 
         GameState gameState = GameState.getInstance();
         mainView.draw(gameState.getLevels().get(gameState.getCurrentFloorNum()), gameState.getPlayer());
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }

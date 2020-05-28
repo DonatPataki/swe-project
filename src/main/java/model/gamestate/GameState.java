@@ -80,9 +80,13 @@ public class GameState {
             JAXBContext jaxbContext = JAXBContext.newInstance(GameState.class);
             Marshaller jaxbmarshaller = jaxbContext.createMarshaller();
             jaxbmarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            File file = new File(getClass().getClassLoader().getResource("save/save.xml").getFile());
-            jaxbmarshaller.marshal(this, file);
-
+            jaxbmarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+            File file = new File("save/save.xml");
+            if (file.getParentFile().mkdirs())
+                Logger.info("created");
+            FileOutputStream output = new FileOutputStream(file);
+            jaxbmarshaller.marshal(this, output);
+            output.close();
         } catch (Exception e) {
             Logger.error(e);
         }
@@ -92,16 +96,18 @@ public class GameState {
      * Loads the last save.
      */
     public void load() {
-        File xml = new File(getClass().getClassLoader().getResource("save/save.xml").getFile());
+        File xml = new File("save/save.xml");
 
         JAXBContext jaxbContext;
         try {
+            FileInputStream input = new FileInputStream(xml);
             jaxbContext = JAXBContext.newInstance(GameState.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Point temp = (((GameState) jaxbUnmarshaller.unmarshal(xml)).player.getPosition());
-            levels.set(0, (((GameState) jaxbUnmarshaller.unmarshal(xml)).getLevels().get(0)));
-            player.setPosition(temp);
-        } catch (JAXBException e)
+            GameState temp = (((GameState) jaxbUnmarshaller.unmarshal(input)));
+            player.setPosition(temp.player.getPosition());
+            levels.set(0, temp.getLevels().get(0));
+            input.close();
+        } catch (Exception e)
         {
             Logger.error(e);
         }
