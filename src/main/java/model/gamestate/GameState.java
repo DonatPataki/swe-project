@@ -11,7 +11,6 @@ import org.tinylog.Logger;
 import view.MainView;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -38,7 +37,7 @@ public class GameState {
     private Integer currentFloorNum;
 
     /**
-     * Constructor of {@cod GameState}
+     * Constructor of {@code GameState}.
      */
     private GameState() {
         this.player = Player.getInstance();

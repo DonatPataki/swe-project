@@ -16,7 +16,7 @@ public class Pathfinder {
     private final int[][] level;
 
     /**
-     * Constructs a {@code Pathfinder} object
+     * Constructs a {@code Pathfinder} object.
      *
      * @param level a {@link Level} where we want to find a path
      */
@@ -42,7 +42,7 @@ public class Pathfinder {
     }
 
     /**
-     * A* search loop
+     * A* search loop.
      *
      * @param startingPoint starting {@link Point} of the search
      * @param endPoint end {@link Point} of the search
@@ -54,7 +54,7 @@ public class Pathfinder {
         neigbors(current, endPoint);
 
         while (!open.isEmpty()) {
-            if (current.position.equals(endPoint))
+            if (current.getPosition().equals(endPoint))
                 break;
 
             current = open.get(0);
@@ -75,15 +75,15 @@ public class Pathfinder {
         Node node;
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
-                Point neigborPosition = new Point(centerNode.position.getX() + x, centerNode.position.getY() + y);
+                Point neigborPosition = new Point(centerNode.getPosition().getX() + x, centerNode.getPosition().getY() + y);
                 node = new Node(centerNode, neigborPosition);
                 if ((x != 0 || y != 0)
-                        && node.position.getX() > -1 && node.position.getX() < level[0].length
-                        && node.position.getY() > -1 && node.position.getY() < level.length
-                        && level[node.position.getY()][node.position.getX()] > 0
+                        && node.getPosition().getX() > -1 && node.getPosition().getX() < level[0].length
+                        && node.getPosition().getY() > -1 && node.getPosition().getY() < level.length
+                        && level[node.getPosition().getY()][node.getPosition().getX()] > 0
                         && !open.contains(node) && !closed.contains(node)) {
-                    node.g = node.parent.g + distance(node.position, node.parent.position);
-                    node.h = distance(node.position, endPoint);
+                    node.setG(node.getParent().getG() + distance(node.getPosition(), node.getParent().getPosition()));
+                    node.setH(distance(node.getPosition(), endPoint));
 
                     open.add(node);
                 }
@@ -111,16 +111,16 @@ public class Pathfinder {
      * @return If optimal path exits between 2 points returns the List of {@link Point}s to get there. Otherwise returns an empty list
      */
     private List<Point> calculatePath(Node node, Point endPoint) {
-        if (!node.position.equals(endPoint)) {
+        if (!node.getPosition().equals(endPoint)) {
             Logger.debug("no path found");
             return new ArrayList<>();
         }
 
         List<Point> path = new ArrayList<>();
-        path.add(0, node.position);
-        while (node.parent != null) {
-            node = node.parent;
-            path.add(0, node.position);
+        path.add(0, node.getPosition());
+        while (node.getParent() != null) {
+            node = node.getParent();
+            path.add(0, node.getPosition());
         }
         path.remove(0);
         Logger.debug("path found");

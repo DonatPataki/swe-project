@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 import model.gamestate.GameState;
 import view.MainView;
 
+/**
+ * Javafx entry point.
+ */
 public class App extends Application {
 
     @Override

@@ -1,4 +1,4 @@
 /**
- * Defines view
+ * Defines view.
  */
 package view;

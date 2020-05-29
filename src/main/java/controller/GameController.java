@@ -16,6 +16,9 @@ import java.util.List;
 
 import static view.MainView.*;
 
+/**
+ * Controller for the game.
+ */
 public class GameController {
 
     @Getter
@@ -23,11 +26,21 @@ public class GameController {
 
     private GameState gameState;
 
+    /**
+     * Constructs {@code GameController}.
+     *
+     * @param mainView link to {@link MainView}.
+     */
     public GameController(MainView mainView) {
         this.mainView = mainView;
         this.gameState = GameState.getInstance();
     }
 
+    /**
+     * Events  on mouse presssed.
+     *
+     * @param event mouseevent
+     */
     public void onMousePressed(MouseEvent event) {
         Point location = new Point((int)event.getX() / HORIZONTAL, (int)event.getY() / VERTICAL);
         Logger.debug("clicked at location: " + location.getX() + " " + location.getY());
@@ -42,6 +55,11 @@ public class GameController {
         }
     }
 
+    /**
+     * Events on key pressed.
+     *
+     * @param keyEvent keyevent
+     */
     public void onKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.R) {
             Logger.debug("regenerate level");
@@ -61,6 +79,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Starts draw.
+     */
     public void display() {
         mainView.draw(gameState.getLevels().get(gameState.getCurrentFloorNum()), gameState.getPlayer());
     }

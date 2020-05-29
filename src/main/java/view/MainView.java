@@ -9,26 +9,48 @@ import javafx.scene.transform.Affine;
 import model.level.Level;
 import model.player.Player;
 
+/**
+ * View for the game.
+ */
 public class MainView extends VBox {
 
+    /**
+     * Window height.
+     */
     public static final int HEIGHT = 800;
+    /**
+     * Window width.
+     */
     public static final int WIDTH = 800;
+    /**
+     * Number of rows.
+     */
     public static final int ROWS = 25;
+    /**
+     * Number of collums.
+     */
     public static final int COLLUMS = 25;
+    /**
+     * Height of drawn block.
+     */
     public static final int VERTICAL = HEIGHT / ROWS;
+    /**
+     * Width of drawn block.
+     */
     public static final int HORIZONTAL = WIDTH / COLLUMS;
 
     private Canvas canvas;
 
     private Affine affine;
 
-    GameController gameController;
-
+    /**
+     * Constructs {@code MainView}.
+     */
     public MainView() {
-        this.gameController = new GameController(this);
+        GameController gameController = new GameController(this);
         this.canvas = new Canvas(HEIGHT,WIDTH);
-        this.canvas.setOnMousePressed(this.gameController::onMousePressed);
-        this.canvas.setOnKeyPressed(this.gameController::onKeyPressed);
+        this.canvas.setOnMousePressed(gameController::onMousePressed);
+        this.canvas.setOnKeyPressed(gameController::onKeyPressed);
         this.canvas.setFocusTraversable(true);
 
         this.getChildren().addAll(this.canvas);
@@ -37,6 +59,11 @@ public class MainView extends VBox {
         this.affine.appendScale(HEIGHT / (float)ROWS, WIDTH / (float)COLLUMS);
     }
 
+    /**
+     * Draws game current state.
+     * @param currentLevel level to be drawn
+     * @param player player to be drawn
+     */
     public void draw(Level currentLevel, Player player) {
         GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
         graphicsContext.setTransform(this.affine);

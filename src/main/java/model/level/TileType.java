@@ -1,11 +1,17 @@
 package model.level;
 
+import lombok.Getter;
+
 /**
- * Helper enum class for {@link Level}
+ * Helper enum class for {@link Level}.
  */
 public enum TileType {
+    /**
+     * Tile types.
+     */
     NOTHING(1), ASCEND(2), DESCEND(3);
 
+    @Getter
     private final int value;
 
     /**
@@ -15,14 +21,5 @@ public enum TileType {
      */
     private TileType(int value) {
         this.value = value;
-    }
-
-    /**
-     * Returns the value of the enum.
-     *
-     * @return value of enum
-     */
-    public int getValue() {
-        return value;
     }
 }

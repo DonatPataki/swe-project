@@ -10,11 +10,11 @@ class NodeTest {
     @Test
     void testCompareTo() {
         Node nodeA = new Node(null, new Point(1, 1));
-        nodeA.g = 10;
-        nodeA.h = 13;
+        nodeA.setG(10);
+        nodeA.setH(13);
         Node nodeB = new Node(null, new Point(1, 1));
-        nodeB.g = 5;
-        nodeB.h = 8;
+        nodeB.setG(5);
+        nodeB.setH(8);
         assertEquals( 10, nodeA.compareTo(nodeB));
     }
 

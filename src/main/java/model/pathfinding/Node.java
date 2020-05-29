@@ -1,15 +1,17 @@
 package model.pathfinding;
 
+import lombok.Data;
 import model.util.Point;
 
 /**
  * Helper class for {@link Pathfinder}.
  */
+@Data
 public class Node implements Comparable {
-    public Node parent;
-    public Point position;
-    public double g;
-    public double h;
+    private Node parent;
+    private Point position;
+    private double g;
+    private double h;
 
     /**
      * Constructs a {@code Node} object.
@@ -23,7 +25,8 @@ public class Node implements Comparable {
     }
 
     /**
-     * Compares the current and another {@code Node}'s f value
+     * Compares the current and another {@code Node}'s f value.
+     *
      * @param o the {@code Node} we want to compare to
      * @return the result of the comparison
      */

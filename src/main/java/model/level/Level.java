@@ -33,7 +33,7 @@ public class Level {
     }
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public Level() {}
 
